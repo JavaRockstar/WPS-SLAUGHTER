@@ -1,3 +1,4 @@
 # WPS-SLAUGHTER
 
-A WPS cracking script by ApatheticEuphoria,Aanarchyy.
+A WPS cracking script by ApatheticEuphoria,
++ Major Help & Support from Aanarchyy.
