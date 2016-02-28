@@ -133,15 +133,14 @@ sleep 1
 clear
 ;;
 	2)
+clear
 ;;
 	*)Invalid Option
 ;;
 esac
 
-xterm -e "wash -i $ADAPTER1"
-
+xterm -e "wash -i $ADAPTER1" & 
 echo 
-clear
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
 clear
 echo 
@@ -190,7 +189,7 @@ menu
 ;;
 	4)
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 menu
 ;;
 	5)
@@ -318,7 +317,7 @@ esac
 
 
 
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 
 echo 
 clear
@@ -365,7 +364,7 @@ menu
 ;;
 	4)
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 menu
 ;;
 	5)
@@ -505,7 +504,7 @@ clear
 ;;
 esac
 
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -552,7 +551,7 @@ menu
 ;;
 	4)
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 menu
 ;;
 	5)
@@ -705,7 +704,7 @@ clear
 esac
 
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -751,7 +750,7 @@ menu
 ;;
 	4)
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 menu
 ;;
 	5)
@@ -916,7 +915,7 @@ clear
 esac
 
 
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 clear
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -963,7 +962,7 @@ menu
 ;;
 	4)
 clear
-xterm -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1" & 
 menu
 ;;
 	5)
