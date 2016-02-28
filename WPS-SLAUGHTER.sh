@@ -138,7 +138,7 @@ clear
 ;;
 esac
 
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 
 echo 
 clear
@@ -190,7 +190,7 @@ menu
 ;;
 	4)
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 menu
 ;;
 	5)
@@ -318,7 +318,7 @@ esac
 
 
 
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 
 echo 
 clear
@@ -365,7 +365,7 @@ menu
 ;;
 	4)
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 menu
 ;;
 	5)
@@ -505,7 +505,7 @@ clear
 ;;
 esac
 
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -552,7 +552,7 @@ menu
 ;;
 	4)
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 menu
 ;;
 	5)
@@ -705,7 +705,7 @@ clear
 esac
 
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -751,7 +751,7 @@ menu
 ;;
 	4)
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 menu
 ;;
 	5)
@@ -916,7 +916,7 @@ clear
 esac
 
 
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 clear
 echo 
 read -p " - What is the BSSID(MAC) of the Target - ": BSSID;
@@ -963,7 +963,7 @@ menu
 ;;
 	4)
 clear
-gnome-terminal  --geometry=111x20 --title='Scanning for targets' -e "wash -i $ADAPTER1"
+xterm -e "wash -i $ADAPTER1"
 menu
 ;;
 	5)
