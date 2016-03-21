@@ -1,5 +1,5 @@
 ***3/21/16***
-***AQUIRED BY FLUXION***
+***ACQUIRED BY FLUXION***
 
 +For most up to date version go here:
 +https://github.com/deltaxflux/fluxion
