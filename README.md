@@ -1,9 +1,9 @@
 ***3/21/16***
-***ACQUIRED BY FLUXION***
+***WPS-SLAUGHTER HAS BEEN ACQUIRED BY FLUXION***
 
 + For most up to date version go here:
 + https://github.com/deltaxflux/fluxion
-+ ^ (Updated WPS-SLAUGHTER included)*
++ ^ (WPS-SLAUGHTER included)*
 
 # WPS-SLAUGHTER
 
