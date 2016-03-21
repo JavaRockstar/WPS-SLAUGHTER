@@ -1,7 +1,9 @@
-***3/21/16-AQUIRED BY FLUXION***
-For most up to date version go here:
-https://github.com/deltaxflux/fluxion
-^ (Updated WPS-SLAUGHTER included)*
+***3/21/16***
+***AQUIRED BY FLUXION***
+
++For most up to date version go here:
++https://github.com/deltaxflux/fluxion
++ ^ (Updated WPS-SLAUGHTER included)*
 
 # WPS-SLAUGHTER
 
